@@ -1,0 +1,11 @@
+[package]
+name = "social-scrapper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+reqwest = { version = "0.12.5", features = ["json"]}
+serde_json = { version = "1.0.122" }
+serde = { version = "1.0.204", features = ["derive"] }
+tokio = { version = "*", features = ["full"] }
+chrono = { version = "*" }
