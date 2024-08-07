@@ -1,0 +1,10 @@
+[package]
+name = "social-store"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diesel = { version = "2.1.0", features = ["chrono", "uuid", "serde_json", "numeric"] }
+diesel-async = { version = "0.5", features = ["postgres", "deadpool"] }
+diesel-derive-enum = { version = "2.1.0", features = ["postgres"] }
+error-stack = "0.5.0"
