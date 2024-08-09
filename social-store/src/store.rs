@@ -3,6 +3,7 @@ use diesel::{ExpressionMethods, Queryable, Selectable};
 use diesel_async::pooled_connection::deadpool::{Object, Pool};
 use diesel_async::pooled_connection::AsyncDieselConnectionManager;
 use diesel_async::{AsyncConnection, AsyncPgConnection, RunQueryDsl};
+
 use error_stack::{Report, ResultExt};
 
 pub type PgPool = Pool<AsyncPgConnection>;
@@ -28,6 +29,9 @@ impl Store {
         self.pool.get().await.unwrap()
     }
     pub async fn load_data(&self) {
+        use models::schema::accounts;
+        use models::social_account::Account;
+
         let mut conn = self.get_conn().await;
         let data = accounts::table
             .filter(accounts::id.gt(1))
@@ -36,20 +40,4 @@ impl Store {
             .unwrap();
         println!("{:?}", data);
     }
-}
-
-diesel::table! {
-    accounts {
-        id -> Integer,
-        email -> Text,
-        password -> Text,
-    }
-}
-
-#[derive(Queryable, Selectable, PartialEq, Debug)]
-#[diesel(table_name = accounts)]
-pub struct Account {
-    pub id: i32,
-    pub email: String,
-    pub password: String,
 }
