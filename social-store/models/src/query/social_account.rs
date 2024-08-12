@@ -12,9 +12,7 @@ impl SocialAccount {
 
         query.execute(conn).await
     }
-}
 
-impl SocialAccount {
     pub async fn find_social_profile_by_social_account_id(conn: &mut PgConn, social_account_id: (String, String)){
         use crate::schema::social_account::dsl as sa_dsl;
         use diesel_async::RunQueryDsl;
