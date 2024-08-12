@@ -30,7 +30,7 @@ impl Store {
     }
     pub async fn load_data(&self) {
         use models::schema::accounts;
-        use models::social_account::Account;
+        use models::social_account1::Account;
 
         let mut conn = self.get_conn().await;
         let data = accounts::table

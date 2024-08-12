@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+chrono = { workspace = true }
 diesel = { workspace = true , features = ["chrono", "uuid", "serde_json", "numeric"] }
 diesel-async = { workspace = true, features = ["postgres", "deadpool"] }
 diesel-derive-enum = { workspace = true, features = ["postgres"] }
