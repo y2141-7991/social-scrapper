@@ -23,3 +23,4 @@ diesel-async = { version = "0.5", features = ["postgres", "deadpool"] }
 diesel-derive-enum = { version = "2.1.0", features = ["postgres"] }
 error-stack = "0.5.0"
 models = { path = "social-store/models" }
+social-store = { path = "social-store" }

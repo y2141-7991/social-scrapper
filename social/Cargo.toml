@@ -9,3 +9,5 @@ serde_json = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 tokio = { workspace = true, features = ["full"] }
 chrono = { workspace = true }
+social-store.workspace = true
+models.workspace = true

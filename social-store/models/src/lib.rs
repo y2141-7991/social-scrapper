@@ -2,6 +2,7 @@ pub mod schema;
 pub mod social_account1;
 pub mod social_account;
 pub mod query;
+pub mod enums;
 
 
 use diesel_async::pooled_connection::deadpool::Object;
