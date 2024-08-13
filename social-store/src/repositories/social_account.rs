@@ -13,6 +13,5 @@ pub trait SocialAccountInterface {
 impl SocialAccountInterface for Store {
     async fn find_social_account_by_social_account_id(&self, account_id: (String, String)) {
         let mut conn = self.get_conn().await;
-
     }
 }

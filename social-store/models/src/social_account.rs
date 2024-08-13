@@ -1,13 +1,12 @@
-use chrono::{DateTime, Utc, NaiveDateTime};
-use diesel::query_dsl::methods::{FilterDsl, SelectDsl};
+use chrono::NaiveDateTime;
 use diesel::{Identifiable, Queryable, Selectable, Insertable};
-use diesel_async::pooled_connection::deadpool::{Object, Pool};
-use diesel_async::pooled_connection::AsyncDieselConnectionManager;
-use diesel_async::{AsyncConnection, AsyncPgConnection, RunQueryDsl};
 
-#[derive(Queryable, Selectable, Insertable, Identifiable, PartialEq, Debug)]
+
+
+#[derive(Selectable, Insertable, Queryable, PartialEq, Debug)]
 #[diesel(primary_key(social_name, social_id))]
 #[diesel(table_name = crate::schema::social_account)]
+#[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct SocialAccount {
     pub social_name: String,
     pub social_id: String,

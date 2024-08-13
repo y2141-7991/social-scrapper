@@ -12,14 +12,14 @@ diesel::table! {
         social_id -> Text,
         status -> Int4,
         username -> Text,
-        updated_at -> Timestamp,
-        published_at -> Timestamp,
-        name -> Text,
+        updated_at -> Nullable<Timestamp>,
+        published_at -> Nullable<Timestamp>,
+        name -> Nullable<Text>,
         avatar_url -> Text,
         biography -> Text,
-        followers_count -> Int8,
-        followings_count -> Int8,
-        statuses_count -> Int8,
+        followers_count -> Nullable<Int8>,
+        followings_count -> Nullable<Int8>,
+        statuses_count -> Nullable<Int8>,
         link -> Text
     }
 }
