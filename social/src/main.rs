@@ -12,7 +12,7 @@ mod utils;
 
 #[tokio::main]
 async fn main() {
-    let store = Store::new("postgres://postgres:password@localhost:5432/postgres".to_string());
+    let store = Store::new("postgres://postgres:123@localhost:5432/postgres".to_string());
     let mut conn = store.get_conn().await;
 
     let account = SocialAccount::find_social_profile_by_social_account_id(&mut conn, ("twitter".to_string(), "12345678901234567".to_string())).await;
