@@ -1,8 +1,8 @@
-use serde_json::{json, Value};
 use reqwest::{Client, Error as APIError};
+use serde_json::{json, Value};
 
-use crate::crawling::sessions::post_request;
 use crate::crawling::gql::{PROFILE_GRAPHQL_FUNCTION, TWITCH_BASE_URL};
+use crate::crawling::sessions::post_request;
 
 pub async fn get_user_by_login(login: &str) -> Result<Value, APIError> {
     let client = Client::new();
@@ -17,6 +17,6 @@ pub async fn get_user_by_login(login: &str) -> Result<Value, APIError> {
     let response = post_request(&client, TWITCH_BASE_URL, json);
     match response.await {
         Ok(res) => Ok(res),
-        Err(e) => Err(e)
+        Err(e) => Err(e),
     }
 }

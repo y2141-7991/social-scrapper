@@ -1,7 +1,6 @@
-use chrono::NaiveDateTime;
-use diesel::{Identifiable, Queryable, Selectable, Insertable, AsChangeset};
 use crate::enums::SocialAccountEnum;
-
+use chrono::NaiveDateTime;
+use diesel::{AsChangeset, Identifiable, Insertable, Queryable, Selectable};
 
 #[derive(Selectable, Insertable, Queryable, PartialEq, Debug, Identifiable)]
 #[diesel(primary_key(social_name, social_id))]

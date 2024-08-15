@@ -4,5 +4,5 @@
 pub enum SocialAccountEnum {
     Inactive,
     #[default]
-    Active
+    Active,
 }

@@ -1,6 +1,5 @@
 use chrono::{DateTime, Utc};
 
-
 #[derive(Debug)]
 pub struct SocialProfile {
     pub social_name: String,

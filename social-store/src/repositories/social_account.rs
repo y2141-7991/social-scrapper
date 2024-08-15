@@ -1,8 +1,8 @@
 use crate::store::Store;
+use diesel::query_dsl::methods::FilterDsl;
+use diesel::ExpressionMethods;
+use diesel_async::RunQueryDsl;
 use models::social_account::SocialAccount;
-use diesel::query_dsl::methods::{FilterDsl};
-use diesel::{ExpressionMethods};
-use diesel_async::{RunQueryDsl};
 
 #[async_trait::async_trait]
 pub trait SocialAccountInterface {
