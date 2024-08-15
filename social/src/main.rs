@@ -16,8 +16,6 @@ async fn main() {
     let store = Store::new("postgres://postgres:123@localhost:5432/postgres".to_string());
     let mut conn = store.get_conn().await;
 
-    let account = SocialAccount::find_social_profile_by_social_account_id(&mut conn, ("twitch".to_string(), "36340781".to_string())).await;
-
     let user = crawl_account_by_username("tarik").await.upsert(&mut conn).await;
     println!("{:?}", user);
 }
