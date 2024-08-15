@@ -1,8 +1,4 @@
-use diesel::query_dsl::methods::{FilterDsl, SelectDsl};
-use diesel::{ExpressionMethods, Queryable, Selectable};
-use diesel_async::pooled_connection::deadpool::{Object, Pool};
-use diesel_async::pooled_connection::AsyncDieselConnectionManager;
-use diesel_async::{AsyncConnection, AsyncPgConnection, RunQueryDsl};
+use diesel::{Queryable, Selectable};
 
 use crate::schema::accounts;
 

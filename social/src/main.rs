@@ -1,7 +1,5 @@
-use chrono::{NaiveDate, NaiveDateTime, NaiveTime};
 use crawlers::crawl_account_by_username;
-use models::social_account::{SocialAccount, SocialAccountNew};
-use reqwest::Error as ReqwestError;
+use models::social_account::SocialAccount;
 use social_store::store::Store;
 
 mod crawlers;
@@ -19,7 +17,7 @@ async fn main() {
     )
     .await;
 
-    let user = crawl_account_by_username("tarik")
+    let user = crawl_account_by_username("Kyedae")
         .await
         .upsert(&mut conn)
         .await;

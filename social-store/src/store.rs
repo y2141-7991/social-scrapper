@@ -1,10 +1,7 @@
-use diesel::query_dsl::methods::{FilterDsl, SelectDsl};
-use diesel::{ExpressionMethods, Queryable, Selectable};
 use diesel_async::pooled_connection::deadpool::{Object, Pool};
 use diesel_async::pooled_connection::AsyncDieselConnectionManager;
-use diesel_async::{AsyncConnection, AsyncPgConnection, RunQueryDsl};
+use diesel_async::{AsyncConnection, AsyncPgConnection};
 
-use error_stack::{Report, ResultExt};
 
 pub type PgPool = Pool<AsyncPgConnection>;
 pub type PgConn = Object<AsyncPgConnection>;
@@ -27,17 +24,5 @@ impl Store {
     }
     pub async fn get_conn(&self) -> PgConn {
         self.pool.get().await.unwrap()
-    }
-    pub async fn load_data(&self) {
-        use models::schema::accounts;
-        use models::social_account1::Account;
-
-        let mut conn = self.get_conn().await;
-        let data = accounts::table
-            .filter(accounts::id.gt(1))
-            .load::<Account>(&mut conn)
-            .await
-            .unwrap();
-        println!("{:?}", data);
     }
 }
