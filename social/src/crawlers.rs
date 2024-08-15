@@ -8,7 +8,7 @@ fn generate_profile_url(username: String) -> String {
 
     let username_trimmed = username.trim();
 
-    url.write_fmt(format_args!("/{}", username_trimmed))
+    url.write_fmt(format_args!("{}", username_trimmed))
         .expect("Can not write this format");
 
     url
@@ -46,10 +46,10 @@ pub async fn crawl_account_by_username(login: &str) -> SocialAccountNew {
             .as_str()
             .unwrap()
             .to_string(),
-        biography: user_response["data"]["user"]["description"]
+        biography: Some(user_response["data"]["user"]["description"]
             .as_str()
-            .unwrap()
-            .to_string(),
+            .unwrap_or_default()
+            .to_string()),
         followers_count: Some(
             user_response["data"]["user"]["followers"]["totalCount"]
                 .to_string()

@@ -10,6 +10,7 @@ diesel = { workspace = true, features = ["chrono", "uuid", "serde_json", "numeri
 diesel-async = { workspace = true, features = ["postgres", "deadpool"] }
 diesel-derive-enum = { workspace = true, features = ["postgres"] }
 error-stack = { workspace = true }
-
+thiserror.workspace = true
+serde_json.workspace = true
 
 tokio = { workspace = true, features = ["full"]  }

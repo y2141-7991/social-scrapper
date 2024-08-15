@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+async-trait.workspace = true 
 reqwest = { workspace = true, features = ["json"] }
 serde_json = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
@@ -11,3 +12,4 @@ tokio = { workspace = true, features = ["full"] }
 chrono = { workspace = true }
 social-store.workspace = true
 models.workspace = true
+diesel = { workspace = true, features = ["chrono", "uuid", "serde_json", "numeric"] }

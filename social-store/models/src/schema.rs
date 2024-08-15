@@ -25,7 +25,7 @@ diesel::table! {
         published_at -> Nullable<Timestamp>,
         name -> Nullable<Text>,
         avatar_url -> Text,
-        biography -> Text,
+        biography -> Nullable<Text>,
         followers_count -> Nullable<Integer>,
         followings_count -> Nullable<Integer>,
         statuses_count -> Nullable<Integer>,
