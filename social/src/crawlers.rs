@@ -9,18 +9,19 @@ fn generate_profile_url(username: String) -> String {
     let username_trimmed = username.trim();
 
     url.write_fmt(format_args!("/{}", username_trimmed))
-        .expect("msg");
+        .expect("Can not write this format");
 
     url
 }
 
 pub async fn crawl_account_by_username(login: &str) -> SocialAccountNew {
     let user_response = get_user_by_login(login).await.unwrap();
-    let a = &user_response["data"]["user"]["id"];
-    println!("{}", &a);
     let sa: SocialAccountNew = SocialAccountNew {
         social_name: "twitch".to_string(),
-        social_id: a.clone().as_str().unwrap().to_string(),
+        social_id: user_response["data"]["user"]["id"]
+            .as_str()
+            .unwrap()
+            .to_string(),
         status: models::enums::SocialAccountEnum::Active,
         username: user_response["data"]["user"]["displayName"]
             .as_str()
