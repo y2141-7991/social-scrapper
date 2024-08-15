@@ -1,19 +1,21 @@
 use diesel::{
-    ExpressionMethods, QueryDsl, SelectableHelper,
+    upsert::on_constraint, ExpressionMethods, QueryDsl, SelectableHelper
 };
-use crate::{social_account::SocialAccount, PgConn};
+use crate::{social_account::{SocialAccount, SocialAccountNew}, PgConn};
 
 
-impl SocialAccount {
-    pub async fn insert(&self, conn: &mut PgConn) -> Result<usize, diesel::result::Error> {
+impl SocialAccountNew {
+    pub async fn upsert(&self, conn: &mut PgConn) -> Result<usize, diesel::result::Error> {
         use crate::schema::social_account::dsl;
         use diesel_async::RunQueryDsl;
 
-        let query = diesel::insert_into(dsl::social_account).values(self);
-
+        let query = diesel::insert_into(dsl::social_account).values(self).on_conflict(on_constraint("social_account_pkey")).do_update().set(self);
         query.execute(conn).await
     }
+}
 
+
+impl SocialAccount {
     pub async fn find_social_profile_by_social_account_id(conn: &mut PgConn, social_account_id: (String, String)) {
         use crate::schema::social_account::dsl as sa_dsl;
         use diesel_async::RunQueryDsl;
