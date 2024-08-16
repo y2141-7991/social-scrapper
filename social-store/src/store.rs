@@ -6,6 +6,7 @@ use diesel_async::{AsyncConnection, AsyncPgConnection};
 pub type PgPool = Pool<AsyncPgConnection>;
 pub type PgConn = Object<AsyncPgConnection>;
 
+#[derive(Clone)]
 pub struct Store {
     pool: PgPool,
 }
