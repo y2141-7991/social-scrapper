@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.3.1
+    container_name: redpanda
+    hostname: redpanda
+    command:
+      - redpanda start
+      - --smp 1
+      - --memory 1G
+      - --overprovisioned
+      - --node-id 0
+      - --kafka-addr INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
+      - --advertise-kafka-addr INTERNAL://redpanda:29092,EXTERNAL://localhost:9092
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    networks:
+      - internalNetwork
+    ports:
+      - 9092:9092
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9644/v1/status/ready"]
+      interval: 5s
+      timeout: 2s
+      retries: 24
+      start_period: 30s
+  
+  redpanda_console:
+    image: docker.redpanda.com/redpandadata/console:v2.3.1
+    container_name: redpanda_console
+    entrypoint: /bin/sh
+    command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yaml; /app/console"
+    ports:
+      - 8080:8080
+      - 9644:9644
+    networks:
+      - internalNetwork
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yaml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: [redpanda:29092]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda:9644"]
+    depends_on:
+      - redpanda
+
+volumes:
+  redpanda_data:
+
+networks:
+  internalNetwork:
