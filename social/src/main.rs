@@ -4,7 +4,6 @@ use social_store::store::Store;
 
 mod crawlers;
 mod crawling;
-mod infra;
 mod utils;
 mod services;
 
