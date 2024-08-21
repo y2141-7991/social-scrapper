@@ -4,7 +4,8 @@ members = [ "crates/kafka",
     "social",
     "social-store",
     "social-store/models",
-    "crates/kafka"
+    "crates/kafka",
+    "social-task"
 ]
 
 [workspace.package]

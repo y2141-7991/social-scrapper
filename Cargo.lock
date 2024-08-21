@@ -1536,6 +1536,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "social-task"
+version = "0.1.0"
+dependencies = [
+ "kafka",
+ "tokio",
+]
+
+[[package]]
 name = "socket2"
 version = "0.5.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"

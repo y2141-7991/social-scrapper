@@ -47,6 +47,15 @@ services:
             urls: ["http://redpanda:9644"]
     depends_on:
       - redpanda
+  
+  redpanda-topic-create:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.3.1
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    entrypoint: ["bash", "-c", "sleep 10 & rpk topic create test-redpanda --brokers redpanda:29092"]
+    networks:
+      - internalNetwork
 
 volumes:
   redpanda_data:

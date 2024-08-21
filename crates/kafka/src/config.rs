@@ -10,7 +10,7 @@ pub struct KafkaConnectionConfig {
 impl KafkaConnectionConfig {
     pub fn to_client_config(&self) -> ClientConfig {
         let mut client_config = ClientConfig::new();
-        client_config.set("bootstrap_servers", &self.bootstrap_servers);
+        client_config.set("bootstrap.servers", &self.bootstrap_servers);
         client_config
     }
 }
