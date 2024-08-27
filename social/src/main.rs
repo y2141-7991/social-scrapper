@@ -17,7 +17,7 @@ async fn main() {
     // )
     // .await;
 
-    let service1 = SocialAccountServiceComponents{ store };
+    let service1 = SocialAccountCrawlingComponents{ store };
     let acc = service1.crawl_twitch_account_by_username("tarik").await;
     println!("{:?}", acc);
 }

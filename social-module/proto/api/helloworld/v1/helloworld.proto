@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package helloworld;
+package social.api.helloworld.v1;
 
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}

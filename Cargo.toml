@@ -1,12 +1,15 @@
 [workspace]
 resolver = "2"
-members = [ "crates/kafka",
+members = [
+    "crates/kafka",
     "social",
     "social-store",
     "social-store/models",
     "crates/kafka",
     "social-task",
-    "social-module"]
+    "social-module",
+    "social-module/social-grpc",
+]
 
 [workspace.package]
 name = "social-scrapper"
@@ -37,3 +40,4 @@ prost = "0.12.3"
 models = { path = "social-store/models" }
 social-store = { path = "social-store" }
 kafka = { path = "crates/kafka"}
+social-grpc = { path = "social-module/social-grpc" }

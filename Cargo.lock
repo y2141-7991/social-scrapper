@@ -1837,10 +1837,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "social-grpc"
+version = "0.1.0"
+dependencies = [
+ "prost",
+ "social-store",
+ "tokio",
+ "tonic",
+ "tonic-build",
+]
+
+[[package]]
 name = "social-module"
 version = "0.1.0"
 dependencies = [
  "prost",
+ "social-store",
  "tokio",
  "tonic",
  "tonic-build",
