@@ -17,7 +17,7 @@ pub fn create_kafka_consumer(conn_config: &KafkaConnectionConfig, topic: &str, g
     consumer
 }
 
-pub async fn consume(consumer: StreamConsumer) {
+pub async fn consume_message(consumer: StreamConsumer) {
     loop {
         match consumer.recv().await {
             Err(e) => println!("{:?}", e),
