@@ -1852,6 +1852,7 @@ name = "social-module"
 version = "0.1.0"
 dependencies = [
  "prost",
+ "social-grpc",
  "social-store",
  "tokio",
  "tonic",

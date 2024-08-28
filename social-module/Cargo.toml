@@ -8,6 +8,7 @@ tokio = { workspace = true, features = ["full"] }
 tonic.workspace = true
 prost.workspace = true
 social-store.workspace = true
+social-grpc.workspace = true
 
 [build-dependencies]
 tonic-build.workspace = true
