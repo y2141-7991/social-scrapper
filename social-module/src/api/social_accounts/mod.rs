@@ -1,5 +1,5 @@
 use social_store::store::Store;
-use social_grpc::social::api::social_account::v1;
+use social_grpc::social::api::social_account::v1::social_account_api_service_server::SocialAccountApiServiceServer;
 
 pub mod service;
 
@@ -9,8 +9,7 @@ pub struct SocialAccountComponents {
 }
 
 
-// pub fn service(store: Store) -> SocialAccountApiServiceServer<SocialAccountComponents> {
-//     let inner = SocialAccountComponents { store };
-//     let a = SocialAccountApiServiceServer::new(inner);
-//     a
-// }
+pub fn service(store: Store) -> SocialAccountApiServiceServer<SocialAccountComponents> {
+    let inner = SocialAccountComponents { store };
+    SocialAccountApiServiceServer::new(inner)
+}

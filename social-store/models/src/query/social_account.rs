@@ -22,7 +22,7 @@ impl SocialAccount {
     pub async fn find_social_profile_by_social_account_id(
         conn: &mut PgConn,
         social_account_id: (String, String),
-    ) {
+    ) -> Vec<SocialAccount> {
         use crate::schema::social_account::dsl as sa_dsl;
         use diesel_async::RunQueryDsl;
 
@@ -32,9 +32,7 @@ impl SocialAccount {
             .filter(sa_dsl::social_name.eq(_social_name))
             .filter(sa_dsl::social_id.eq(_social_id))
             .select(SocialAccount::as_select())
-            .load::<SocialAccount>(conn)
-            .await
-            .expect("");
-        println!("{:?}", query);
+            .load::<SocialAccount>(conn);
+        query.await.expect("")
     }
 }

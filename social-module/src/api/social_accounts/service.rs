@@ -1,3 +1,4 @@
+use social_store::repositories::social_account::SocialAccountInterface;
 use tonic::{Request, Response, Status};
 use social_grpc::social::api::social_account::v1::{social_account_api_service_server::SocialAccountApiService, SocialAccountRequest, SocialAccountReply};
 
@@ -8,7 +9,7 @@ impl SocialAccountApiService for SocialAccountComponents {
     async fn social_account(&self, request: Request<SocialAccountRequest>) -> Result<Response<SocialAccountReply>, Status> {
         let req = request.into_inner();
 
-        // let response = self.store.find_social_account_by_social_account_id(account_id);
+        let response = self.store.find_social_account_by_social_account_id((req.social_name, req.social_id)).await;
 
         Ok(Response::new(SocialAccountReply {
                 social_name: String::from("value"),
