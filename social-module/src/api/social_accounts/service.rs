@@ -1,29 +1,36 @@
+use social_grpc::social::api::social_account::v1::{
+    social_account_api_service_server::SocialAccountApiService, SocialAccountReply,
+    SocialAccountRequest,
+};
 use social_store::repositories::social_account::SocialAccountInterface;
 use tonic::{Request, Response, Status};
-use social_grpc::social::api::social_account::v1::{social_account_api_service_server::SocialAccountApiService, SocialAccountRequest, SocialAccountReply};
 
 use super::SocialAccountComponents;
 
 #[tonic::async_trait]
 impl SocialAccountApiService for SocialAccountComponents {
-    async fn social_account(&self, request: Request<SocialAccountRequest>) -> Result<Response<SocialAccountReply>, Status> {
+    async fn social_account(
+        &self,
+        request: Request<SocialAccountRequest>,
+    ) -> Result<Response<SocialAccountReply>, Status> {
         let req = request.into_inner();
 
-        let response = self.store.find_social_account_by_social_account_id((req.social_name, req.social_id)).await;
+        let response = self
+            .store
+            .find_social_account_by_social_account_id((req.social_name, req.social_id))
+            .await;
 
         Ok(Response::new(SocialAccountReply {
-                social_name: String::from("value"),
-                social_id: String::from("value"),
-                username: String::from("value"),
-                name: Some(String::from("value")),
-                avatar_url: String::from("value"),
-                biography: Some(String::from("value")),
-                followers_count: Some(1),
-                followings_count: Some(1),
-                statuses_count: Some(1),
-                link: String::from("value"),
-
+            social_name: String::from("value"),
+            social_id: String::from("value"),
+            username: String::from("value"),
+            name: Some(String::from("value")),
+            avatar_url: String::from("value"),
+            biography: Some(String::from("value")),
+            followers_count: Some(1),
+            followings_count: Some(1),
+            statuses_count: Some(1),
+            link: String::from("value"),
         }))
-
     }
 }

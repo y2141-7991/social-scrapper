@@ -4,8 +4,8 @@ use social_store::store::Store;
 
 mod crawlers;
 mod crawling;
-mod utils;
 mod services;
+mod utils;
 
 #[tokio::main]
 async fn main() {
