@@ -34,6 +34,10 @@ rdkafka = "0.36.0"
 log = "0.4.20"
 tonic = "0.10.2"
 tonic-build = "0.10.2"
+tonic-health = "0.10.2"
+tonic-reflection = "0.10.2"
+tonic-web = "0.10.2"
+tower-http = "0.4"
 prost = "0.12.3"
 
 
