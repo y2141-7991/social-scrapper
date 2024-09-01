@@ -1,6 +1,6 @@
 use crate::api;
 use social_store::store::Store;
-use tonic::{transport::Server, Request, Response, Status};
+use tonic::transport::Server;
 use tonic_web::GrpcWebLayer;
 
 pub async fn start_api_server(store: Store) -> Result<(), Box<dyn std::error::Error>> {
