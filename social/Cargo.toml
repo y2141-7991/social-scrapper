@@ -13,3 +13,7 @@ chrono = { workspace = true }
 social-store.workspace = true
 models.workspace = true
 diesel = { workspace = true, features = ["chrono", "uuid", "serde_json", "numeric"] }
+
+
+rand.workspace = true
+futures.workspace = true
