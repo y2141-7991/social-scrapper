@@ -51,9 +51,6 @@ pub async fn consume_message(consumer: StreamConsumer) {
 }
 
 pub async fn consumer_mess(consumer: StreamConsumer) {
-    // while let Some(Ok(process)) = consumer.stream().next().await {
-        
-    // };
 
     match consumer.stream().next().await.unwrap() {
         Err(e) => println!("{:?}", e),
@@ -69,32 +66,32 @@ pub async fn consumer_mess(consumer: StreamConsumer) {
     }
 }
 
-pub async fn run_concurrently(consumer: StreamConsumer, number_workers: i32) {
+pub async fn run_concurrently(topic: String, group_id: String, number_workers: i32) {
     (0..number_workers).map(|_| {
-        tokio::spawn(create_kafka_consumer_concurrently(topic
+        tokio::spawn(create_kafka_consumer_concurrently(topic.to_owned(), group_id.to_owned()
         ))
     }).collect::<FuturesOrdered<_>>().for_each(|_| async {}).await
 }
 
 
-pub async fn create_kafka_consumer_concurrently(topic: &str, group_id: &str) {
+pub async fn create_kafka_consumer_concurrently(topic: String, group_id: String) {
     let conn_config = KafkaConnectionConfig { bootstrap_servers: String::from("0.0.0.0:9092") };
     let mut client_config = KafkaConnectionConfig::to_client_config(&conn_config);
     let consumer: StreamConsumer = client_config
         .set("auto.offset.reset", "earliest")
-        .set("group.id", group_id)
+        .set("group.id", &group_id)
         .set("enable.partition.eof", "false")
         .set("session.timeout.ms", "6000")
         .set("enable.auto.commit", "false")
         .create()
         .expect("Failed to create Kafka consumer");
     consumer
-        .subscribe(&[topic])
+        .subscribe(&[&topic])
         .expect("Failed to subcribe topic");
     log::info!(
         "Kafka consumer created and subcribed to topic '{}' with group id '{}'",
         topic,
-        group_id
+        &group_id
     );
 
     match consumer.stream().next().await.unwrap() {
