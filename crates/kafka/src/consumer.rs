@@ -1,10 +1,9 @@
 use crate::config::KafkaConnectionConfig;
 use rdkafka::{
-    consumer::{CommitMode, Consumer, StreamConsumer}, Message, message::{BorrowedMessage, OwnedMessage}
+    consumer::{CommitMode, Consumer, StreamConsumer}, Message
 };
-use futures::stream::{FuturesOrdered, FuturesUnordered};
-use futures::{StreamExt, TryStreamExt};
-use log::info;
+use futures::stream::FuturesOrdered;
+use futures::StreamExt;
 
 pub fn create_kafka_consumer(
     conn_config: &KafkaConnectionConfig,
@@ -51,18 +50,11 @@ pub async fn consume_message(consumer: StreamConsumer) {
 }
 
 pub async fn consumer_mess(consumer: StreamConsumer) {
-
-    match consumer.stream().next().await.unwrap() {
-        Err(e) => println!("{:?}", e),
-        Ok(message) => {
-            match message.payload_view::<str>() {
-                None => println!("No message"),
-                Some(Ok(msg)) => println!("{:?}", msg),
-                Some(Err(e)) => println!("{:?}", e),
-            }
-            consumer.commit_message(&message, CommitMode::Async).unwrap()
+    while let Some(Ok(msg)) = consumer.stream().next().await {
+        let _ = consumer.commit_message(&msg, CommitMode::Async);
+        if let Some(Ok(msg)) = msg.payload_view::<str>() {
+            println!("Consumed: {}", msg);
         }
-        
     }
 }
 
@@ -94,16 +86,10 @@ pub async fn create_kafka_consumer_concurrently(topic: String, group_id: String)
         &group_id
     );
 
-    match consumer.stream().next().await.unwrap() {
-        Err(e) => println!("{:?}", e),
-        Ok(message) => {
-            match message.payload_view::<str>() {
-                None => println!("No message"),
-                Some(Ok(msg)) => println!("{:?}", msg),
-                Some(Err(e)) => println!("{:?}", e),
-            }
-            consumer.commit_message(&message, CommitMode::Async).unwrap()
-        }
-        
+    while let Some(Ok(msg)) = consumer.stream().next().await {
+        if let Some(Ok(msg)) = msg.payload_view::<str>() {
+            println!("Consumed: {}", msg)
+        };
+        let _ = consumer.commit_message(&msg, CommitMode::Async);
     };
 }
