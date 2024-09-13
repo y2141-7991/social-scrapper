@@ -48,3 +48,4 @@ models = { path = "social-store/models" }
 social-store = { path = "social-store" }
 kafka = { path = "crates/kafka"}
 social-grpc = { path = "social-module/social-grpc" }
+social = { path = "social" }

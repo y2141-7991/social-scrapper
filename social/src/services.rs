@@ -1,4 +1,4 @@
-use crate::crawl_account_by_username;
+use crate::crawlers::crawl_account_by_username;
 use social_store::store::Store;
 
 #[derive(Clone)]

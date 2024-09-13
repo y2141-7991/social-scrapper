@@ -6,3 +6,5 @@ edition.workspace = true
 [dependencies]
 tokio = { workspace = true, features = ["full"]}
 kafka.workspace = true
+social.workspace = true
+social-store.workspace = true
